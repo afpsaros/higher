@@ -69,6 +69,8 @@ import torch.nn.functional as F
 import torch.optim as optim
 from torchvision import datasets, transforms
 
+import sys
+sys.path.insert(0,'../')
 import higher
 
 
@@ -98,7 +100,7 @@ def main():
         batch_size=128, shuffle=True)
 
     # Initialize an energy model and optimizer for the energy function.
-    device = torch.device("cuda")
+    device = torch.device("cpu" if not torch.cuda.is_available() else "cuda")
     Enet = EnergyNet().to(device)
 
     if args.mode == 'ICNN':

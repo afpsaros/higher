@@ -69,7 +69,8 @@ def main():
     np.random.seed(args.seed)
 
     # Set up the Omniglot loader.
-    device = torch.device('cuda')
+    # device = torch.device('cuda')
+    device = torch.device("cpu" if not torch.cuda.is_available() else "cuda")
     db = OmniglotNShot(
         '/tmp/omniglot-data',
         batchsz=args.task_num,
